@@ -1,0 +1,23 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    background: linear-gradient(120deg, #43cea2,#185a9d);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@keyframes appear {
+    from{
+        transform: translateY(-100px);
+    }
+    to {
+        transform: translateY(0px);
+    }
+}

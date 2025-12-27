@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Appointment | Care Connect+</title>
+    <link rel="stylesheet" href="styles/book.css" />
+    <link rel="stylesheet" href="styles/nav.css" />
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="navigation">
+        <ul class="navList">
+            <li class="logo">
+                <h2>Care Connect+</h2>
+            </li>
+            <li class="navItem"><a href="home.html">Home</a></li>
+            <li class="navItem"><a href="book.html" style="color: #185a9d; font-size: large; pointer-events: none;">Book an Appointment</a></li>
+            <li class="navItem"><a href="login.html">I am a Doctor/Admin</a></li>
+            <li class="navItem"><a href="about.html">About Us</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <!-- Left Column: Form -->
+        <div class="form-box">
+            <h2><i class="fas fa-calendar-check"></i> Book Appointment</h2>
+            <form id="bookingForm">
+                <div class="input-group">
+                    <label for="patientName"><i class="fas fa-user"></i> Patient Name</label>
+                    <input type="text" id="patientName" placeholder="Enter your full name" required />
+                </div>
+                
+                <div class="input-group">
+                    <label for="patientEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" id="patientEmail" placeholder="Enter your email" required />
+                </div>
+                
+                <div class="input-group">
+                    <label for="patientPhone"><i class="fas fa-phone"></i> Phone Number</label>
+                    <input type="tel" id="patientPhone" placeholder="Enter your phone number" required />
+                </div>
+                
+                <div class="input-group">
+                    <label for="reason"><i class="fas fa-stethoscope"></i> Reason for Visit</label>
+                    <input type="text" id="reason" placeholder="Briefly describe your symptoms" required />
+                </div>
+                
+                <div class="input-group">
+                    <label for="category"><i class="fas fa-heartbeat"></i> Medical Category</label>
+                    <div class="select-wrapper">
+                        <select id="category" required>
+                            <option value="">Select a category</option>
+                            <option value="cardiology">Cardiology (Heart)</option>
+                            <option value="neurology">Neurology (Brain)</option>
+                            <option value="ophthalmology">Ophthalmology (Eye)</option>
+                            <option value="gastroenterology">Gastroenterology (Stomach)</option>
+                            <option value="dermatology">Dermatology (Skin)</option>
+                            <option value="trichology">Trichology (Hair)</option>
+                            <option value="general">General Physician</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="doctor"><i class="fas fa-user-md"></i> Choose Doctor</label>
+                    <div class="select-wrapper">
+                        <select id="doctor" required>
+                            <option value="">Select a doctor</option>
+                            <!-- Doctors will be populated by JavaScript -->
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="datetime-group">
+                    <div class="input-group">
+                        <label for="appointmentDate"><i class="fas fa-calendar-alt"></i> Preferred Date</label>
+                        <input type="date" id="appointmentDate" required min="" />
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="appointmentTime"><i class="fas fa-clock"></i> Preferred Time</label>
+                        <select id="appointmentTime" required>
+                            <option value="">Select time</option>
+                            <option value="09:00">9:00 AM</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="14:00">2:00 PM</option>
+                            <option value="15:00">3:00 PM</option>
+                            <option value="16:00">4:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="medicalHistory"><i class="fas fa-file-medical"></i> Medical History (Optional)</label>
+                    <textarea id="medicalHistory" rows="4" placeholder="Any pre-existing conditions, medications, or allergies..."></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-calendar-plus"></i> Confirm Appointment
+                </button>
+            </form>
+            
+            <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle"></i>
+                <h3>Appointment Booked Successfully!</h3>
+                <p>Your appointment has been scheduled. You will receive a confirmation email shortly.</p>
+                <p style="margin-top: 15px; font-size: 0.9rem;">Appointment ID: <strong>CC-2023-00123</strong></p>
+            </div>
+        </div>
+        
+        <!-- Right Column: Doctor Info & Summary -->
+        <div class="right-column">
+            <div class="doctor-card">
+                <h3><i class="fas fa-user-md"></i> Selected Doctor</h3>
+                <div class="doctor-info" id="doctorInfo">
+                    <div class="doctor-avatar" id="doctorAvatar">DR</div>
+                    <div class="doctor-details">
+                        <h4 id="doctorName">Select a doctor</h4>
+                        <span class="doctor-specialty" id="doctorSpecialty">Specialty will appear here</span>
+                        <div class="doctor-rating" id="doctorRating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>4.5</span>
+                        </div>
+                        <div class="doctor-experience" id="doctorExperience">Experience: -- years</div>
+                    </div>
+                </div>
+                <div class="doctor-bio" id="doctorBio">
+                    Please select a doctor to view their profile and availability.
+                </div>
+            </div>
+            
+            <div class="booking-summary">
+                <h3><i class="fas fa-receipt"></i> Booking Summary</h3>
+                <div class="summary-item">
+                    <span class="summary-label">Consultation Fee:</span>
+                    <span class="summary-value" id="feeAmount">$0.00</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Service Charge:</span>
+                    <span class="summary-value">$5.00</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Tax (8%):</span>
+                    <span class="summary-value" id="taxAmount">$0.00</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Total Amount:</span>
+                    <span class="summary-value" id="totalAmount">$0.00</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Appointment Date:</span>
+                    <span class="summary-value" id="summaryDate">--</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Appointment Time:</span>
+                    <span class="summary-value" id="summaryTime">--</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/book.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,314 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(120deg, #43cea2, #185a9d);
+    min-height: 100vh;
+}
+
+/* Main Container */
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 40px;
+    align-items: start;
+}
+
+/* Form Box */
+.form-box {
+    margin-top: 70px;
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.form-box h2 {
+    color: #185a9d;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.form-box h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(to right, #43cea2, #185a9d);
+    border-radius: 2px;
+}
+
+/* Form Elements */
+.input-group {
+    margin-bottom: 25px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid #e1e5ee;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.input-group textarea {
+    max-width: 430px;
+    max-height: 300px;
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+    outline: none;
+    border-color: #43cea2;
+    background: white;
+}
+
+.input-group input::placeholder {
+    color: #ddd;
+}
+
+/* Custom Select Styling */
+
+
+/* Date and Time */
+.datetime-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(to right, #185a9d, #43cea2);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(24, 90, 157, 0.3);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Doctor Info Card */
+.doctor-card {
+    margin-top: 70px;
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+}
+
+.doctor-card h3 {
+    color: #185a9d;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.doctor-card h3 i {
+    color: #43cea2;
+}
+
+.doctor-info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.doctor-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #185a9d, #43cea2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.doctor-details h4 {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.doctor-specialty {
+    color: #43cea2;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.doctor-rating {
+    color: #ffb400;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.doctor-experience {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Booking Summary */
+.booking-summary {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.booking-summary h3 {
+    color: #185a9d;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.booking-summary h3 i {
+    color: #43cea2;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.summary-item:last-child {
+    border-bottom: none;
+    font-weight: 600;
+    color: #185a9d;
+    font-size: 1.1rem;
+}
+
+.summary-label {
+    color: #666;
+}
+
+.summary-value {
+    color: #333;
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .navList {
+        padding: 0 20px;
+        flex-wrap: wrap;
+    }
+
+    .navItem {
+        padding: 15px 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .datetime-group {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .form-box {
+        padding: 30px 20px;
+    }
+
+    .doctor-info {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-box,
+.doctor-card,
+.booking-summary {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Success Message */
+.success-message {
+    display: none;
+    background: linear-gradient(135deg, #43cea2, #185a9d);
+    color: white;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.success-message i {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.success-message h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
