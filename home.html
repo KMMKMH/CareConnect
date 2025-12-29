@@ -3,27 +3,129 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width-device = width, initial-scale = 1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Care Connect+ | Best Hospital Management!</title>
     <link rel="stylesheet" href="styles/home.css" />
     <link rel="stylesheet" href="styles/nav.css" />
+    <script src="js/nav.js" defer></script>
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-    <div class="navigation">
-        <ul class="navList">
-            <li class="logo">
-                <h2>Care Connect+</h2>
-            </li>
-            <li class="navItem"><a href="home.html" style="color: #185a9d; font-size: large; pointer-events: none;">Home</a></li>
+    <div class="navigation" id="nav">
+        <div class="logo">
+            <h2>Care Connect+</h2>
+        </div>
+
+        <!-- Hamburger Menu Button -->
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <ul class="navList" id="navList">
+            <li class="navItem"><a href="home.html"
+                    style="color: #185a9d; font-size: large; pointer-events: none;">Home</a></li>
             <li class="navItem"><a href="book.html">Book an Appointment</a></li>
             <li class="navItem"><a href="login.html">I am a Doctor/Admin</a></li>
             <li class="navItem"><a href="about.html">About Us</a></li>
         </ul>
     </div>
 
-    <script src="js/home.js"></script>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Healthcare Management, <span class="highlight">Simplified</span></h1>
+            <p class="hero-subtitle">Streamlining hospital workflows, connecting doctors with patients, and making
+                healthcare accessible for everyone.</p>
+            <div class="hero-buttons">
+                <a href="book.html" class="btn-primary">Book Appointment Now</a>
+                <a href="login.html" class="btn-secondary-hero">Doctor/Admin Login</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                alt="Modern Hospital Interface">
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2 class="section-title">Why Choose <span class="highlight">Care Connect+</span>?</h2>
+        <p class="section-subtitle">Our platform brings innovation to hospital management with these key features:</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <h3>Easy Booking</h3>
+                <p>Book appointments with specialists in seconds. Real-time availability and instant confirmation.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <h3>Doctor Dashboard</h3>
+                <p>Doctors can manage appointments, view patient history, and update records seamlessly.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Admin Analytics</h3>
+                <p>Comprehensive insights into hospital operations, patient flow, and resource management.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Secure & Private</h3>
+                <p>End-to-end encryption and strict privacy controls to protect patient data and confidentiality.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="cta-content">
+            <h2>Ready to Experience Modern Healthcare?</h2>
+            <p>Join thousands of patients and healthcare professionals using Care Connect+ today.</p>
+            <div class="cta-buttons">
+                <a href="book.html" class="btn-primary">Get Started Now</a>
+                <a href="about.html" class="btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>Care Connect+</h2>
+                <p>Revolutionizing hospital management systems.</p>
+            </div>
+            <div class="footer-links">
+                <a href="home.html">Home</a>
+                <a href="book.html">Booking</a>
+                <a href="login.html">Login</a>
+                <a href="about.html">About Us</a>
+            </div>
+            <div class="footer-contact">
+                <p><i class="fas fa-envelope"></i> support@careconnectplus.com</p>
+                <p><i class="fas fa-phone"></i> +961 76 777 888</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Care Connect+. All rights reserved. | University Project</p>
+        </div>
+    </footer>
 </body>
 
 </html>

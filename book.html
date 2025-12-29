@@ -7,16 +7,25 @@
     <title>Book Appointment | Care Connect+</title>
     <link rel="stylesheet" href="styles/book.css" />
     <link rel="stylesheet" href="styles/nav.css" />
+    <script src="js/nav.js" defer></script>
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-    <div class="navigation">
-        <ul class="navList">
-            <li class="logo">
-                <h2>Care Connect+</h2>
-            </li>
+    <div class="navigation" id="nav">
+        <div class="logo">
+            <h2>Care Connect+</h2>
+        </div>
+
+        <!-- Hamburger Menu Button -->
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <ul class="navList" id="navList">
             <li class="navItem"><a href="home.html">Home</a></li>
             <li class="navItem"><a href="book.html" style="color: #185a9d; font-size: large; pointer-events: none;">Book an Appointment</a></li>
             <li class="navItem"><a href="login.html">I am a Doctor/Admin</a></li>
@@ -30,27 +39,27 @@
             <h2><i class="fas fa-calendar-check"></i> Book Appointment</h2>
             <form id="bookingForm">
                 <div class="input-group">
-                    <label for="patientName"><i class="fas fa-user"></i> Patient Name</label>
+                    <label for="patientName"><i class="fas fa-user"></i> Patient Name *</label>
                     <input type="text" id="patientName" placeholder="Enter your full name" required />
                 </div>
                 
                 <div class="input-group">
-                    <label for="patientEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                    <label for="patientEmail"><i class="fas fa-envelope"></i> Email Address *</label>
                     <input type="email" id="patientEmail" placeholder="Enter your email" required />
                 </div>
                 
                 <div class="input-group">
-                    <label for="patientPhone"><i class="fas fa-phone"></i> Phone Number</label>
+                    <label for="patientPhone"><i class="fas fa-phone"></i> Phone Number *</label>
                     <input type="tel" id="patientPhone" placeholder="Enter your phone number" required />
                 </div>
                 
                 <div class="input-group">
-                    <label for="reason"><i class="fas fa-stethoscope"></i> Reason for Visit</label>
+                    <label for="reason"><i class="fas fa-stethoscope"></i> Reason for Visit *</label>
                     <input type="text" id="reason" placeholder="Briefly describe your symptoms" required />
                 </div>
                 
                 <div class="input-group">
-                    <label for="category"><i class="fas fa-heartbeat"></i> Medical Category</label>
+                    <label for="category"><i class="fas fa-heartbeat"></i> Medical Category *</label>
                     <div class="select-wrapper">
                         <select id="category" required>
                             <option value="">Select a category</option>
@@ -66,23 +75,23 @@
                 </div>
                 
                 <div class="input-group">
-                    <label for="doctor"><i class="fas fa-user-md"></i> Choose Doctor</label>
+                    <label for="doctor"><i class="fas fa-user-md"></i> Choose Doctor *</label>
                     <div class="select-wrapper">
                         <select id="doctor" required>
                             <option value="">Select a doctor</option>
-                            <!-- Doctors will be populated by JavaScript -->
+                            <!-- Doctors will be loaded dynamically -->
                         </select>
                     </div>
                 </div>
                 
                 <div class="datetime-group">
                     <div class="input-group">
-                        <label for="appointmentDate"><i class="fas fa-calendar-alt"></i> Preferred Date</label>
+                        <label for="appointmentDate"><i class="fas fa-calendar-alt"></i> Preferred Date *</label>
                         <input type="date" id="appointmentDate" required min="" />
                     </div>
                     
                     <div class="input-group">
-                        <label for="appointmentTime"><i class="fas fa-clock"></i> Preferred Time</label>
+                        <label for="appointmentTime"><i class="fas fa-clock"></i> Preferred Time *</label>
                         <select id="appointmentTime" required>
                             <option value="">Select time</option>
                             <option value="09:00">9:00 AM</option>
@@ -97,7 +106,11 @@
                 
                 <div class="input-group">
                     <label for="medicalHistory"><i class="fas fa-file-medical"></i> Medical History (Optional)</label>
-                    <textarea id="medicalHistory" rows="4" placeholder="Any pre-existing conditions, medications, or allergies..."></textarea>
+                    <textarea id="medicalHistory" rows="3" placeholder="Any pre-existing conditions, medications, or allergies..."></textarea>
+                </div>
+                
+                <div class="form-note">
+                    <p><i class="fas fa-info-circle"></i> Fields marked with * are required</p>
                 </div>
                 
                 <button type="submit" class="submit-btn">
@@ -109,60 +122,51 @@
                 <i class="fas fa-check-circle"></i>
                 <h3>Appointment Booked Successfully!</h3>
                 <p>Your appointment has been scheduled. You will receive a confirmation email shortly.</p>
-                <p style="margin-top: 15px; font-size: 0.9rem;">Appointment ID: <strong>CC-2023-00123</strong></p>
+                <p style="margin-top: 10px; font-size: 0.9rem;">Appointment ID: <strong id="appointmentId"></strong></p>
+                <button class="close-btn" id="closeSuccess">Close</button>
             </div>
         </div>
         
-        <!-- Right Column: Doctor Info & Summary -->
+        <!-- Right Column: Simple Info -->
         <div class="right-column">
-            <div class="doctor-card">
-                <h3><i class="fas fa-user-md"></i> Selected Doctor</h3>
-                <div class="doctor-info" id="doctorInfo">
-                    <div class="doctor-avatar" id="doctorAvatar">DR</div>
-                    <div class="doctor-details">
-                        <h4 id="doctorName">Select a doctor</h4>
-                        <span class="doctor-specialty" id="doctorSpecialty">Specialty will appear here</span>
-                        <div class="doctor-rating" id="doctorRating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>4.5</span>
-                        </div>
-                        <div class="doctor-experience" id="doctorExperience">Experience: -- years</div>
-                    </div>
+            <div class="info-card">
+                <h3><i class="fas fa-info-circle"></i> Appointment Details</h3>
+                <div class="info-item">
+                    <span class="info-label">Selected Doctor:</span>
+                    <span class="info-value" id="selectedDoctorName">None selected</span>
                 </div>
-                <div class="doctor-bio" id="doctorBio">
-                    Please select a doctor to view their profile and availability.
+                <div class="info-item">
+                    <span class="info-label">Appointment Date:</span>
+                    <span class="info-value" id="selectedDate">Not selected</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Appointment Time:</span>
+                    <span class="info-value" id="selectedTime">Not selected</span>
+                </div>
+                <div class="info-note">
+                    <p><i class="fas fa-exclamation-circle"></i> You will receive a confirmation email after booking.</p>
+                    <p><i class="fas fa-clock"></i> Please arrive 15 minutes before your appointment.</p>
+                    <p><i class="fas fa-id-card"></i> Bring your ID and insurance card (if any).</p>
                 </div>
             </div>
             
-            <div class="booking-summary">
-                <h3><i class="fas fa-receipt"></i> Booking Summary</h3>
-                <div class="summary-item">
-                    <span class="summary-label">Consultation Fee:</span>
-                    <span class="summary-value" id="feeAmount">$0.00</span>
+            <div class="info-card">
+                <h3><i class="fas fa-phone-alt"></i> Need Help?</h3>
+                <p>Contact our support team:</p>
+                <div class="contact-info">
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> bookings@careconnectplus.com</p>
+                    <p><i class="fas fa-clock"></i> Mon-Fri: 8AM-8PM</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Medical Center Dr</p>
                 </div>
-                <div class="summary-item">
-                    <span class="summary-label">Service Charge:</span>
-                    <span class="summary-value">$5.00</span>
-                </div>
-                <div class="summary-item">
-                    <span class="summary-label">Tax (8%):</span>
-                    <span class="summary-value" id="taxAmount">$0.00</span>
-                </div>
-                <div class="summary-item">
-                    <span class="summary-label">Total Amount:</span>
-                    <span class="summary-value" id="totalAmount">$0.00</span>
-                </div>
-                <div class="summary-item">
-                    <span class="summary-label">Appointment Date:</span>
-                    <span class="summary-value" id="summaryDate">--</span>
-                </div>
-                <div class="summary-item">
-                    <span class="summary-label">Appointment Time:</span>
-                    <span class="summary-value" id="summaryTime">--</span>
+            </div>
+            
+            <div class="info-card">
+                <h3><i class="fas fa-shield-alt"></i> Your Privacy</h3>
+                <div class="privacy-note">
+                    <p><i class="fas fa-lock"></i> All your information is encrypted</p>
+                    <p><i class="fas fa-user-shield"></i> We follow HIPAA compliance</p>
+                    <p><i class="fas fa-eye-slash"></i> Your data is never shared</p>
                 </div>
             </div>
         </div>

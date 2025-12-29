@@ -3,20 +3,29 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width-device = width, initial-scale = 1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About Us | Care Connect+</title>
     <link rel="stylesheet" href="styles/about.css" />
     <link rel="stylesheet" href="styles/nav.css" />
+    <script src="js/nav.js" defer></script>
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-    <div class="navigation">
-        <ul class="navList">
-            <li class="logo">
-                <h2>Care Connect+</h2>
-            </li>
+    <div class="navigation" id="nav">
+        <div class="logo">
+            <h2>Care Connect+</h2>
+        </div>
+
+        <!-- Hamburger Menu Button -->
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <ul class="navList" id="navList">
             <li class="navItem"><a href="home.html">Home</a></li>
             <li class="navItem"><a href="book.html">Book an Appointment</a></li>
             <li class="navItem"><a href="login.html">I am a Doctor/Admin</a></li>
@@ -25,38 +34,76 @@
     </div>
 
     <div class="content">
+        <!-- Hero Section -->
         <section class="hero">
-            <h1>About Care Connect+</h1>
-            <p>Care Connect+ is a revolutionary hospital management system designed to streamline healthcare operations,
-                enhance patient care, and connect medical professionals with the tools they need to deliver exceptional
-                service. Our mission is to transform healthcare administration through innovative technology.</p>
+            <div class="hero-content">
+                <h1><span class="highlight">Transforming</span> Healthcare Management</h1>
+                <p class="hero-subtitle">Care Connect+ is a revolutionary hospital management system designed for modern healthcare facilities. Our platform bridges the gap between patients, doctors, and administrators with cutting-edge technology.</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <h3>500+</h3>
+                        <p>Doctors Connected</p>
+                    </div>
+                    <div class="stat">
+                        <h3>10,000+</h3>
+                        <p>Appointments Managed</p>
+                    </div>
+                    <div class="stat">
+                        <h3>24/7</h3>
+                        <p>System Uptime</p>
+                    </div>
+                    <div class="stat">
+                        <h3>99.9%</h3>
+                        <p>User Satisfaction</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Modern Hospital Technology">
+            </div>
         </section>
 
+        <!-- Mission Section -->
         <section class="mission-section">
-            <div class="mission-card">
-                <i class="fas fa-bullseye"></i>
-                <h3>Our Mission</h3>
-                <p>To revolutionize healthcare management by providing an integrated, efficient, and user-friendly
-                    platform that connects patients, doctors, and administrators in a seamless ecosystem.</p>
+            <div class="section-header">
+                <h2>Our <span class="highlight">Core</span> Philosophy</h2>
+                <p>Guiding principles that drive our innovation in healthcare technology</p>
             </div>
+            
+            <div class="mission-grid">
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Our Mission</h3>
+                    <p>To revolutionize healthcare management by providing an integrated, efficient, and user-friendly platform that connects patients, doctors, and administrators in a seamless ecosystem, improving healthcare delivery for everyone.</p>
+                </div>
 
-            <div class="mission-card">
-                <i class="fas fa-eye"></i>
-                <h3>Our Vision</h3>
-                <p>To become the leading healthcare management solution globally, setting new standards for efficiency,
-                    patient care, and medical facility operations through cutting-edge technology.</p>
-            </div>
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>Our Vision</h3>
+                    <p>To become the global standard in healthcare management solutions, transforming how medical facilities operate and setting new benchmarks for patient care through innovative technology and compassionate design.</p>
+                </div>
 
-            <div class="mission-card">
-                <i class="fas fa-handshake"></i>
-                <h3>Our Values</h3>
-                <p>Compassion, Innovation, Reliability, and Security guide every feature we develop. We prioritize
-                    patient privacy and data security above all else.</p>
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Our Values</h3>
+                    <p>Compassion, Innovation, Reliability, and Security guide every decision we make. We prioritize patient privacy, data security, and user experience in every feature we develop.</p>
+                </div>
             </div>
         </section>
 
+        <!-- Features Section -->
         <section class="features-section">
-            <h2>Why Choose Care Connect+?</h2>
+            <div class="features-header">
+                <h2>Why <span class="highlight">Care Connect+</span> Stands Out</h2>
+                <p>Innovative features designed for modern healthcare needs</p>
+            </div>
+            
             <div class="features-grid">
                 <div class="feature-item">
                     <div class="feature-icon">
@@ -64,8 +111,7 @@
                     </div>
                     <div class="feature-content">
                         <h4>Patient-Centric Design</h4>
-                        <p>Our system prioritizes patient experience with easy appointment booking, medical record
-                            access, and seamless communication with healthcare providers.</p>
+                        <p>Our system prioritizes patient experience with easy appointment booking, medical record access, and seamless communication with healthcare providers.</p>
                     </div>
                 </div>
 
@@ -75,8 +121,7 @@
                     </div>
                     <div class="feature-content">
                         <h4>Doctor Portal</h4>
-                        <p>Comprehensive tools for healthcare professionals including patient management, prescription
-                            tracking, and appointment scheduling.</p>
+                        <p>Comprehensive tools for healthcare professionals including patient management, prescription tracking, and appointment scheduling.</p>
                     </div>
                 </div>
 
@@ -86,8 +131,7 @@
                     </div>
                     <div class="feature-content">
                         <h4>HIPAA Compliant</h4>
-                        <p>We maintain the highest standards of data security and patient privacy, ensuring full
-                            compliance with healthcare regulations.</p>
+                        <p>We maintain the highest standards of data security and patient privacy, ensuring full compliance with healthcare regulations.</p>
                     </div>
                 </div>
 
@@ -97,8 +141,7 @@
                     </div>
                     <div class="feature-content">
                         <h4>Real-Time Updates</h4>
-                        <p>Instant updates across all modules ensure that patient information, appointments, and medical
-                            records are always current.</p>
+                        <p>Instant updates across all modules ensure that patient information, appointments, and medical records are always current and synchronized.</p>
                     </div>
                 </div>
 
@@ -108,8 +151,7 @@
                     </div>
                     <div class="feature-content">
                         <h4>Advanced Analytics</h4>
-                        <p>Data-driven insights help hospitals optimize operations, reduce costs, and improve patient
-                            outcomes.</p>
+                        <p>Data-driven insights help hospitals optimize operations, reduce costs, and improve patient outcomes through comprehensive reporting tools.</p>
                     </div>
                 </div>
 
@@ -119,13 +161,84 @@
                     </div>
                     <div class="feature-content">
                         <h4>Mobile-Friendly</h4>
-                        <p>Access the system from any device with a responsive design that works perfectly on
-                            smartphones, tablets, and desktops.</p>
+                        <p>Access the system from any device with a responsive design that works perfectly on smartphones, tablets, and desktops.</p>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Team Section -->
+        <section class="team-section">
+            <div class="section-header">
+                <h2>Our <span class="highlight">Development</span> Journey</h2>
+                <p>This university project was built with passion and dedication</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Modern Tech Stack</h3>
+                    <p>Built using HTML5, CSS3, JavaScript, and prepared for PHP/MySQL backend integration. Responsive design across all devices.</p>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>University Project</h3>
+                    <p>Developed as part of our Computer Science curriculum, focusing on real-world healthcare management solutions.</p>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Collaborative Effort</h3>
+                    <p>Created through teamwork, research, and dedication to solving real healthcare management challenges.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>Ready to Experience <span class="highlight">Modern</span> Healthcare Management?</h2>
+                <p>Join the revolution in hospital administration and patient care coordination.</p>
+                <div class="cta-buttons">
+                    <a href="book.html" class="btn-primary">Book Appointment</a>
+                    <a href="login.html" class="btn-secondary">Doctor Login</a>
+                    <a href="home.html" class="btn-outline">View Features</a>
+                </div>
+            </div>
+        </section>
     </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>Care Connect+</h2>
+                <p>Revolutionizing hospital management systems.</p>
+            </div>
+            <div class="footer-links">
+                <a href="home.html">Home</a>
+                <a href="book.html">Booking</a>
+                <a href="login.html">Login</a>
+                <a href="about.html">About Us</a>
+            </div>
+            <div class="footer-contact">
+                <p><i class="fas fa-envelope"></i> support@careconnectplus.com</p>
+                <p><i class="fas fa-phone"></i> +961 76 777 888</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Care Connect+. All rights reserved. | University Project</p>
+        </div>
+    </footer>
+
+    <script src="js/about.js"></script>
 </body>
 
 </html>
