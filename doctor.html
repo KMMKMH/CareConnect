@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor Dashboard | Care Connect+</title>
+    <link rel="stylesheet" href="styles/doctor.css" />
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="doctor-container">
+        <!-- Doctor Header -->
+        <header class="doctor-header">
+            <div class="header-left">
+                <h1><i class="fas fa-heartbeat"></i> Care Connect+ Doctor Portal</h1>
+                <p class="subtitle">Patient Management System</p>
+            </div>
+            <div class="header-right">
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="doctor-main">
+            <!-- Doctor Profile Section -->
+            <section class="doctor-profile-section">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="profile-info">
+                            <h2 id="doctorName">Dr. Sarah Johnson</h2>
+                            <p class="doctor-specialty" id="doctorSpecialty">Cardiologist</p>
+                            <div class="doctor-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>4.5/5.0</span>
+                            </div>
+                        </div>
+                        <button class="edit-profile-btn" onclick="showEditProfileForm()">
+                            <i class="fas fa-edit"></i> Edit Profile
+                        </button>
+                    </div>
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Doctor ID:</span>
+                            <span class="detail-value" id="doctorId">DR-001</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Email:</span>
+                            <span class="detail-value" id="doctorEmail">sarah.johnson@careconnectplus.com</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Phone:</span>
+                            <span class="detail-value" id="doctorPhone">+1 (555) 123-4567</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Experience:</span>
+                            <span class="detail-value" id="doctorExperience">15 years</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Today's Schedule:</span>
+                            <span class="detail-value" id="todaySchedule">8 appointments</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Status:</span>
+                            <span class="detail-value status-active">Available</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Edit Profile Form (Hidden by default) -->
+            <section class="form-section" id="editProfileForm" style="display: none;">
+                <div class="form-card">
+                    <div class="form-header">
+                        <h3>Edit Your Profile</h3>
+                        <button class="close-btn" onclick="hideEditProfileForm()">&times;</button>
+                    </div>
+                    <form id="profileForm" onsubmit="updateProfile(event)">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="editFullName">Full Name *</label>
+                                <input type="text" id="editFullName" name="fullName" required 
+                                       value="Dr. Sarah Johnson">
+                            </div>
+                            <div class="form-group">
+                                <label for="editEmail">Email Address *</label>
+                                <input type="email" id="editEmail" name="email" required 
+                                       value="sarah.johnson@careconnectplus.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="editPhone">Phone Number</label>
+                                <input type="tel" id="editPhone" name="phone" 
+                                       value="+1 (555) 123-4567">
+                            </div>
+                            <div class="form-group">
+                                <label for="editSpecialty">Specialty</label>
+                                <input type="text" id="editSpecialty" name="specialty" 
+                                       value="Cardiology" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="editExperience">Experience (years)</label>
+                                <input type="number" id="editExperience" name="experience" 
+                                       min="0" max="50" value="15">
+                            </div>
+                            <div class="form-group">
+                                <label for="currentPassword">Current Password *</label>
+                                <input type="password" id="currentPassword" name="currentPassword" 
+                                       placeholder="Enter current password to save changes">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="cancel-btn" onclick="hideEditProfileForm()">
+                                Cancel
+                            </button>
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Change Password Form (Hidden by default) -->
+            <section class="form-section" id="changePasswordForm" style="display: none;">
+                <div class="form-card">
+                    <div class="form-header">
+                        <h3>Change Password</h3>
+                        <button class="close-btn" onclick="hideChangePasswordForm()">&times;</button>
+                    </div>
+                    <form id="passwordForm" onsubmit="changePassword(event)">
+                        <div class="form-group">
+                            <label for="oldPassword">Current Password *</label>
+                            <input type="password" id="oldPassword" name="oldPassword" required 
+                                   placeholder="Enter your current password">
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">New Password *</label>
+                            <input type="password" id="newPassword" name="newPassword" required 
+                                   placeholder="Enter new password (min. 8 characters)"
+                                   pattern=".{8,}"
+                                   title="Password must be at least 8 characters">
+                            <small class="form-hint">Must be at least 8 characters</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm New Password *</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required 
+                                   placeholder="Confirm your new password">
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="cancel-btn" onclick="hideChangePasswordForm()">
+                                Cancel
+                            </button>
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-key"></i> Change Password
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Statistics Section -->
+            <section class="stats-section">
+                <h2 class="section-title">Today's Overview</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Scheduled Appointments</h3>
+                            <p class="stat-number" id="scheduledAppointments">8</p>
+                            <p class="stat-subtitle">For today</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Waiting Patients</h3>
+                            <p class="stat-number" id="waitingPatients">3</p>
+                            <p class="stat-subtitle">In waiting room</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Completed Today</h3>
+                            <p class="stat-number" id="completedToday">5</p>
+                            <p class="stat-subtitle">Appointments finished</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Next Patient In</h3>
+                            <p class="stat-number" id="nextPatientTime">15 min</p>
+                            <p class="stat-subtitle">John Doe (Cardiology)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Actions -->
+            <section class="actions-section">
+                <div class="section-header">
+                    <h2 class="section-title">Quick Actions</h2>
+                    <div class="action-buttons">
+                        <button class="action-btn" onclick="showAddPrescription()">
+                            <i class="fas fa-prescription"></i> Add Prescription
+                        </button>
+                        <button class="action-btn" onclick="showChangePasswordForm()">
+                            <i class="fas fa-key"></i> Change Password
+                        </button>
+                        <button class="action-btn" onclick="markAsAway()">
+                            <i class="fas fa-user-clock"></i> Mark as Away
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Patients Management Section -->
+            <section class="patients-section">
+                <div class="section-header">
+                    <h2 class="section-title">Today's Patients</h2>
+                    <div class="filter-options">
+                        <select id="patientFilter" onchange="filterPatients()">
+                            <option value="all">All Patients</option>
+                            <option value="scheduled">Scheduled</option>
+                            <option value="waiting">Waiting</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                        <button class="refresh-btn" onclick="refreshPatients()">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Patients Table -->
+                <div class="table-card">
+                    <div class="table-responsive">
+                        <table class="data-table" id="patientsTable">
+                            <thead>
+                                <tr>
+                                    <th>Patient ID</th>
+                                    <th>Patient Name</th>
+                                    <th>Appointment Time</th>
+                                    <th>Reason for Visit</th>
+                                    <th>Medical History</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="patientsTableBody">
+                                <!-- Patients will be loaded dynamically -->
+                                <tr class="loading-row">
+                                    <td colspan="7">
+                                        <div class="loading-spinner">
+                                            <i class="fas fa-spinner fa-spin"></i> Loading patients...
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Patient Details Modal Area -->
+            <section class="patient-details-section" id="patientDetailsSection" style="display: none;">
+                <div class="details-card">
+                    <div class="details-header">
+                        <h3>Patient Details & Medical Notes</h3>
+                        <button class="close-btn" onclick="hidePatientDetails()">&times;</button>
+                    </div>
+                    <div class="details-content" id="patientDetailsContent">
+                        <!-- Will be loaded dynamically -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Prescription Form (Hidden by default) -->
+            <section class="form-section" id="prescriptionForm" style="display: none;">
+                <div class="form-card">
+                    <div class="form-header">
+                        <h3>Add Prescription</h3>
+                        <button class="close-btn" onclick="hidePrescriptionForm()">&times;</button>
+                    </div>
+                    <form id="prescriptionFormData" onsubmit="addPrescription(event)">
+                        <input type="hidden" id="prescriptionPatientId" name="patientId">
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="patientSelect">Patient *</label>
+                                <select id="patientSelect" name="patientSelect" required>
+                                    <option value="">Select a patient</option>
+                                    <!-- Patients will be loaded dynamically -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="prescriptionDate">Date *</label>
+                                <input type="date" id="prescriptionDate" name="prescriptionDate" required 
+                                       value="<?php echo date('Y-m-d'); ?>">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="medicationName">Medication Name *</label>
+                            <input type="text" id="medicationName" name="medicationName" required 
+                                   placeholder="e.g., Amoxicillin 500mg">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dosage">Dosage Instructions *</label>
+                            <textarea id="dosage" name="dosage" rows="3" required 
+                                      placeholder="e.g., Take 1 tablet every 8 hours for 7 days"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="additionalNotes">Additional Notes</label>
+                            <textarea id="additionalNotes" name="additionalNotes" rows="3" 
+                                      placeholder="Any additional instructions or notes..."></textarea>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="cancel-btn" onclick="hidePrescriptionForm()">
+                                Cancel
+                            </button>
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-prescription"></i> Save Prescription
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="doctor-footer">
+            <p>Care Connect+ Doctor Portal v1.0 | Current Time: <span id="currentTime"></span></p>
+            <p class="system-info">You are logged in as a medical professional. All actions are logged.</p>
+        </footer>
+    </div>
+
+    <!-- Prescription Success Modal -->
+    <div class="modal" id="prescriptionSuccessModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Prescription Added</h3>
+                <button class="close-btn" onclick="closePrescriptionSuccess()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <p id="prescriptionSuccessMessage"></p>
+                <div class="prescription-details" id="prescriptionDetails">
+                    <!-- Will be populated -->
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="submit-btn" onclick="closePrescriptionSuccess()">
+                    OK
+                </button>
+                <button type="button" class="action-btn" onclick="printPrescription()">
+                    <i class="fas fa-print"></i> Print Prescription
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Change Modal -->
+    <div class="modal" id="statusModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="statusModalTitle">Update Appointment Status</h3>
+                <button class="close-btn" onclick="closeStatusModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="statusSelect">Select Status</label>
+                    <select id="statusSelect" class="status-select">
+                        <option value="waiting">Waiting</option>
+                        <option value="in_progress">In Progress</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="doctorNotes">Doctor's Notes</label>
+                    <textarea id="doctorNotes" rows="4" placeholder="Add any notes about the appointment..."></textarea>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="cancel-btn" onclick="closeStatusModal()">
+                    Cancel
+                </button>
+                <button type="button" class="submit-btn" onclick="updateAppointmentStatus()">
+                    Update Status
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/doctor.js"></script>
+</body>
+
+</html>

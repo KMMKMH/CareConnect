@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel | Care Connect+</title>
+    <link rel="stylesheet" href="styles/admin.css" />
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="admin-container">
+        <!-- Admin Header -->
+        <header class="admin-header">
+            <div class="header-left">
+                <h1><i class="fas fa-heartbeat"></i> Care Connect+ Admin</h1>
+                <p class="subtitle">Hospital Management System Control Panel</p>
+            </div>
+            <div class="header-right">
+                <button class="logout-btn" onclick="confirmLogout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Admin Profile Section -->
+            <section class="admin-profile-section">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div class="profile-info">
+                            <h2 id="adminName">Loading...</h2>
+                            <p class="admin-email" id="adminEmail">admin@careconnectplus.com</p>
+                        </div>
+                    </div>
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Admin ID:</span>
+                            <span class="detail-value" id="adminId">ADM-001</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Account Created:</span>
+                            <span class="detail-value" id="accountCreated">2023-10-15</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Last Login:</span>
+                            <span class="detail-value" id="lastLogin">Just now</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Role:</span>
+                            <span class="detail-value role-badge">Super Administrator</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Statistics Section -->
+            <section class="stats-section">
+                <h2 class="section-title">System Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Total Doctors</h3>
+                            <p class="stat-number" id="totalDoctors">0</p>
+                            <p class="stat-subtitle">Registered in system</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-stethoscope"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Medical Categories</h3>
+                            <p class="stat-number" id="totalCategories">0</p>
+                            <p class="stat-subtitle">Available specialties</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Today's Appointments</h3>
+                            <p class="stat-number" id="todayAppointments">0</p>
+                            <p class="stat-subtitle">Scheduled for today</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>System Status</h3>
+                            <p class="stat-number status-online">Online</p>
+                            <p class="stat-subtitle">All systems operational</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Doctors Management Section -->
+            <section class="management-section">
+                <div class="section-header">
+                    <h2 class="section-title">Doctors Management</h2>
+                    <button class="add-btn" onclick="showAddDoctorForm()">
+                        <i class="fas fa-user-plus"></i> Add New Doctor
+                    </button>
+                </div>
+                
+                <!-- Add Doctor Form (Hidden by default) -->
+                <div class="form-card" id="addDoctorForm" style="display: none;">
+                    <div class="form-header">
+                        <h3>Add New Doctor</h3>
+                        <button class="close-btn" onclick="hideAddDoctorForm()">&times;</button>
+                    </div>
+                    <form id="doctorForm" onsubmit="addDoctor(event)">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="doctorName">Full Name *</label>
+                                <input type="text" id="doctorName" name="doctorName" required 
+                                       placeholder="Dr. John Smith">
+                            </div>
+                            <div class="form-group">
+                                <label for="doctorEmail">Email Address *</label>
+                                <input type="email" id="doctorEmail" name="doctorEmail" required 
+                                       placeholder="doctor@careconnectplus.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="doctorPhone">Phone Number</label>
+                                <input type="tel" id="doctorPhone" name="doctorPhone" 
+                                       placeholder="+1 (555) 123-4567">
+                            </div>
+                            <div class="form-group">
+                                <label for="doctorSpecialty">Specialty *</label>
+                                <select id="doctorSpecialty" name="doctorSpecialty" required>
+                                    <option value="">Select specialty</option>
+                                    <!-- Categories will be loaded dynamically -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="doctorExperience">Experience (years)</label>
+                                <input type="number" id="doctorExperience" name="doctorExperience" 
+                                       min="0" max="50" placeholder="5">
+                            </div>
+                            <div class="form-group">
+                                <label for="doctorPassword">Initial Password *</label>
+                                <input type="password" id="doctorPassword" name="doctorPassword" required 
+                                       placeholder="Set doctor's password">
+                                <small class="form-hint">Doctor will change this on first login</small>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="cancel-btn" onclick="hideAddDoctorForm()">
+                                Cancel
+                            </button>
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-save"></i> Add Doctor
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Doctors Table -->
+                <div class="table-card">
+                    <div class="table-responsive">
+                        <table class="data-table" id="doctorsTable">
+                            <thead>
+                                <tr>
+                                    <th>Doctor ID</th>
+                                    <th>Name</th>
+                                    <th>Specialty</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Experience</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="doctorsTableBody">
+                                <!-- Doctors will be loaded dynamically -->
+                                <tr class="loading-row">
+                                    <td colspan="8">
+                                        <div class="loading-spinner">
+                                            <i class="fas fa-spinner fa-spin"></i> Loading doctors...
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Categories Management Section -->
+            <section class="management-section">
+                <div class="section-header">
+                    <h2 class="section-title">Medical Categories</h2>
+                    <button class="add-btn" onclick="showAddCategoryForm()">
+                        <i class="fas fa-plus-circle"></i> Add New Category
+                    </button>
+                </div>
+                
+                <!-- Add Category Form (Hidden by default) -->
+                <div class="form-card" id="addCategoryForm" style="display: none;">
+                    <div class="form-header">
+                        <h3>Add New Medical Category</h3>
+                        <button class="close-btn" onclick="hideAddCategoryForm()">&times;</button>
+                    </div>
+                    <form id="categoryForm" onsubmit="addCategory(event)">
+                        <div class="form-group">
+                            <label for="categoryName">Category Name *</label>
+                            <input type="text" id="categoryName" name="categoryName" required 
+                                   placeholder="e.g., Cardiology">
+                        </div>
+                        <div class="form-group">
+                            <label for="categoryDescription">Description</label>
+                            <textarea id="categoryDescription" name="categoryDescription" 
+                                      rows="3" placeholder="Brief description of this medical specialty"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="cancel-btn" onclick="hideAddCategoryForm()">
+                                Cancel
+                            </button>
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-save"></i> Add Category
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Categories Grid -->
+                <div class="categories-grid" id="categoriesGrid">
+                    <!-- Categories will be loaded dynamically -->
+                    <div class="loading-card">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading categories...</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="admin-footer">
+            <p>Care Connect+ Admin Panel v1.0 | 2026 | University Project</p>
+            <p class="system-info">Server Time: <span id="serverTime"><?php echo date('H:i:s'); ?></span></p>
+        </footer>
+    </div>
+
+    <!-- Edit Doctor Modal -->
+    <div class="modal" id="editDoctorModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close-btn" onclick="closeEditModal()">&times;</button>
+            </div>
+            <form id="editDoctorForm" onsubmit="updateDoctor(event)">
+                <input type="hidden" id="editDoctorId" name="doctorId">
+                <div class="modal-body">
+                    <!-- Form will be loaded dynamically -->
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="cancel-btn" onclick="closeEditModal()">
+                        Cancel
+                    </button>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-save"></i> Update Doctor
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close-btn" onclick="closeConfirmModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage"></p>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="cancel-btn" onclick="closeConfirmModal()">
+                    Cancel
+                </button>
+                <button type="button" class="delete-btn" id="confirmActionBtn">
+                    Confirm
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+
+</html>
